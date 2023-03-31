@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, NgForm } from '@angular/forms';
 import { User } from './user';
 
 @Component({
@@ -11,14 +11,29 @@ export class RegisterComponent implements OnInit {
 
    public user: User = new User();
 
-  constructor() { }
+   public registerForm!: FormGroup;
+  constructor(private formBuilder : FormBuilder) { }
 
   ngOnInit(): void {
+
+    this.registerForm = this.formBuilder.group({
+      lastName:[''],
+      firstName: {value:'indisponible' , disabled: true},
+      email: '',
+      sendCatalog:false,
+    });
   }
-saveData(registerForm: NgForm){
 
-  console.log( registerForm.form);
-  console.log( 'les valeurs' ,JSON.stringify(registerForm.value) );
-
+saveData(){
+  console.log( this.registerForm);
+  console.log( 'les valeurs' ,JSON.stringify(this.registerForm?.value) );
+}
+fillFormData(){
+  this.registerForm.setValue({
+    firstName:'Fred',
+    lastName:'Monique',
+    email:'fred@yahoo.fr',
+    sendCatalog: true,
+  })
 }
 }
