@@ -1,0 +1,47 @@
+<div class="card">
+  <div class="card-header text-black bg-info">
+    S'enregister
+  </div>
+  <div class="card-body">
+    <form class="row g-3 needs-validation"
+       (ngSubmit)="saveData(registerForm)" #registerForm="ngForm">
+      <div class="col-md-4">
+        <label  class="form-label">Nom</label>
+        <input type="text" class="form-control" required placeholder="Nom"
+        [(ngModel)]="user.lastName" name="lastName">
+
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Prenom</label>
+        <input type="text" class="form-control" placeholder="Prenom"
+        [(ngModel)]="user.firstName" name="firstName">
+
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+
+      </div><br>
+      <div class="col-md-4">
+        <label class="form-label">Email</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text">@</span>
+          <input type="email" class="form-control" placeholder="Email"
+          [(ngModel)]="user.email" name="email">
+
+          <div class="invalid-feedback">
+            Please choose a username.
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-12">
+        <button class="btn btn-info" type="submit">Sauvegarder</button>
+      </div>
+
+    </form>
+  </div>
+</div>
