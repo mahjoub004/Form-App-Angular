@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -7,6 +8,15 @@ import {
   Validators,
 } from '@angular/forms';
 import { User } from './user';
+function ratingRangeValidator(min:number , max:number) {
+
+return(c:AbstractControl) : {[key:string] : boolean } | null  =>{
+  if (c.value != null && (isNaN(c.value) || c.value < min || c.value > max)) { // '!!' ni null ni undefined
+      return {'rangeErreur' : true}
+  }
+  return null ;
+};
+}
 
 @Component({
   selector: 'app-register',
@@ -26,6 +36,7 @@ export class RegisterComponent implements OnInit {
       firstName: ['', [Validators.required, Validators.maxLength(20)]], // {value:'indisponible' , disabled: true}
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.minLength(4)]],
+      rating:[null , ratingRangeValidator(1,5)],
       notification: 'email',
       sendCatalog: false,
     });
@@ -53,4 +64,5 @@ export class RegisterComponent implements OnInit {
     }
     phoneControl?.updateValueAndValidity();
   }
+
 }

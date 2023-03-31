@@ -16,7 +16,7 @@
           <span *ngIf="registerForm.get('lastName')?.errors?.['minlength']">Minimum 4 charactéres </span>
         </div>
       </div>
-
+      <!--  -->
       <div class="col-md-4">
         <label class="form-label">Prenom</label>
         <input type="text" class="form-control" placeholder="Prenom"
@@ -29,6 +29,7 @@
         </div>
 
       </div><br>
+      <!--  -->
       <div class="col-md-4">
         <label class="form-label">Email</label>
         <div class="input-group has-validation">
@@ -43,7 +44,7 @@
           </div>
         </div>
       </div>
-
+  <!--  -->
       <div class="col-md-4">
         <label class="form-label">Phone</label>
         <div class="input-group has-validation">
@@ -56,6 +57,24 @@
             <span *ngIf="registerForm.get('phone')?.errors?.['required']">Entrez votre phone</span>
             <span *ngIf="registerForm.get('phone')?.errors?.['minlength']">Entrez un phone valide </span>
           </div>
+        </div>
+      </div><br>
+      <!--  -->
+
+      <div class="col-md-4">
+        <label class="form-label" for="ratingId">Note</label>
+        <input type="number" class="form-control"
+        id="ratingId"
+        placeholder="Note..."
+        formControlName="rating"
+        [ngClass]="{'is-invalid':
+        (registerForm.get('rating')?.touched
+         || registerForm.get('rating')?.dirty)
+         && !registerForm.get('rating')?.valid}">
+
+        <div class="invalid-feedback">
+          <span *ngIf="registerForm.get('rating')?.errors?.['rangeErreur']">
+            Notez notre service client sur une échelle de 1 a 5</span>
         </div>
       </div>
         <!-- button radio email-->
