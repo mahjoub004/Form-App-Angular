@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { User } from './user';
 
 @Component({
@@ -17,9 +17,9 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
 
     this.registerForm = this.formBuilder.group({
-      lastName:[''],
-      firstName: {value:'indisponible' , disabled: true},
-      email: '',
+      lastName:['',[Validators.required , Validators.minLength(4)]],
+      firstName:['',[Validators.required , Validators.maxLength(20)]] , // {value:'indisponible' , disabled: true}
+      email: ['',[Validators.required , Validators.email]],
       sendCatalog:false,
     });
   }

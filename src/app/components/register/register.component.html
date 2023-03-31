@@ -8,10 +8,8 @@
       <div class="col-md-4">
         <label class="form-label">Nom</label>
         <input type="text" class="form-control" placeholder="Nom..."
-        required
-        minlength="4"
         formControlName="lastName"
-          [ngClass]="{'is-invalid':registerForm.get('lastName')?.touched && !registerForm.get('lastName')?.valid}">
+        [ngClass]="{'is-invalid':registerForm.get('lastName')?.touched && !registerForm.get('lastName')?.valid}">
         <!-- #registerForm.get('lastName')="ngModel"  pour avoir le status de l'input -->
         <div class="invalid-feedback">
           <span *ngIf="registerForm.get('lastName')?.errors?.['required']">Entrez votre nom</span>
@@ -22,8 +20,6 @@
       <div class="col-md-4">
         <label class="form-label">Prenom</label>
         <input type="text" class="form-control" placeholder="Prenom"
-        required
-        minlength="4"
           formControlName="firstName"
           [ngClass]="{'is-invalid':registerForm.get('firstName')?.touched && !registerForm.get('firstName')?.valid}">
 
@@ -38,8 +34,6 @@
         <div class="input-group has-validation">
           <span class="input-group-text">@</span>
           <input type="email" class="form-control" placeholder="Email"
-          required
-          email
           formControlName="email"
           [ngClass]="{'is-invalid':registerForm.get('email')?.touched && !registerForm.get('email')?.valid}">
 
@@ -49,6 +43,38 @@
           </div>
         </div>
       </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Phone</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text">0033</span>
+          <input type="number" class="form-control" placeholder="phone"
+          formControlName="phone"
+          [ngClass]="{'is-invalid':registerForm.get('email')?.touched && !registerForm.get('email')?.valid}">
+
+          <div class="invalid-feedback">
+            <span *ngIf="registerForm.get('phone')?.errors?.['required']">Entrez votre phone</span>
+            <span *ngIf="registerForm.get('email')?.errors?.['email']">Entrez un E-mail valide </span>
+          </div>
+        </div>
+      </div>
+        <!-- button radio -->
+        <div class="form-check">
+          <h4> Recevoir les notifications</h4>
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+          <label class="form-check-label" for="flexRadioDefault1">
+            E-mail
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+          <label class="form-check-label" for="flexRadioDefault2">
+            Texte
+          </label>
+        </div>
+
+
+
       <!-- la deuxieme partie de formulaire  -->
       <div class="form-row mb-3">
         <div class="col-md-12">
