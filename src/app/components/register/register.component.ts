@@ -58,14 +58,16 @@ export class RegisterComponent implements OnInit {
       firstName: ['', [Validators.required, Validators.maxLength(20)]], // {value:'indisponible' , disabled: true}
 
       emailGroup: this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      confirmEmail: ['', [Validators.required , Validators.email]],
-      } , {validators: emailMatcher}),
+            email: ['', [Validators.required, Validators.email]],
+            confirmEmail: ['', [Validators.required , Validators.email]],
+            } , {validators: emailMatcher}),
 
       phone: ['', [Validators.required, Validators.minLength(4)]],
       rating:[null , ratingRangeValidator(1,5)],
       notification: 'email',
-      sendCatalog: false,
+      sendCatalog: true,
+
+      addresses: this.formBuilder.array([this.createAddressGroup()])
     });
       // recuperer les changements sans la methode (click) ==> niveau HTML
     this.registerForm.get('notification')?.valueChanges.subscribe(value =>{
@@ -76,15 +78,26 @@ export class RegisterComponent implements OnInit {
     emailControl?.valueChanges.pipe(debounceTime(2000)).subscribe( valeur =>{
       console.log(valeur);
       this.setMessage(emailControl)
-
     })
-
   }
 
+  //methode pour restructurer pour pouvoir dupliquer
+  private createAddressGroup(): FormGroup{
+    return this.formBuilder.group({
+      addressType:['home'],
+      street1:[''],
+      street2:[''],
+      city:[''],
+      state:[''],
+      zip:[''],
+  })
+  }
+//
   saveData() {
     console.log(this.registerForm);
     console.log('les valeurs', JSON.stringify(this.registerForm?.value));
   }
+  //
   fillFormData() {
     this.registerForm.setValue({
       firstName: 'Fred',
@@ -110,7 +123,6 @@ export class RegisterComponent implements OnInit {
           (key) => this.validationErrorMrssages[key as 'required']).join(' ');
       }
       console.log(this.errorMsg);
-
   }
 
 }
