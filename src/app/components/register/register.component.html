@@ -43,8 +43,7 @@
             !registerForm.get('emailGroup.email')?.valid)}">
 
             <div class="invalid-feedback">
-              <span *ngIf="registerForm.get('emailGroup.email')?.errors?.['required']">Entrez votre E-mail</span>
-              <span *ngIf="registerForm.get('emailGroup.email')?.errors?.['email']">Entrez un E-mail valide </span>
+                     {{errorMsg}} <!-- message dynamique pour afficher l'error  -->
             </div>
           </div>
         </div>
