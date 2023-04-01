@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { User } from './user';
+// fonction pour une validation manuelle
 function ratingRangeValidator(min:number , max:number) {
 
 return(c:AbstractControl) : {[key:string] : boolean } | null  =>{
@@ -16,6 +17,19 @@ return(c:AbstractControl) : {[key:string] : boolean } | null  =>{
   }
   return null ;
 };
+}
+// fonction pour valider deux champ 'email'
+
+function emailMatcher(c:AbstractControl):{[key:string] : boolean } | null {
+  const emailControl = c.get('email')
+  const emailConfirmControl = c.get('confirmEmail')
+if (emailControl?.pristine || emailConfirmControl?.pristine) {
+return null;
+}
+if (emailControl?.value === emailConfirmControl?.value) {
+  return null;
+}
+return {'match' : true};
 }
 
 @Component({
@@ -34,7 +48,12 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       lastName: ['', [Validators.required, Validators.minLength(4)]],
       firstName: ['', [Validators.required, Validators.maxLength(20)]], // {value:'indisponible' , disabled: true}
+
+      emailGroup: this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
+      confirmEmail: ['', [Validators.required , Validators.email]],
+      } , {validators: emailMatcher}),
+
       phone: ['', [Validators.required, Validators.minLength(4)]],
       rating:[null , ratingRangeValidator(1,5)],
       notification: 'email',

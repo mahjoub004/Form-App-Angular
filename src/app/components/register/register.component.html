@@ -29,22 +29,46 @@
         </div>
 
       </div><br>
-      <!--  -->
-      <div class="col-md-4">
-        <label class="form-label">Email</label>
-        <div class="input-group has-validation">
-          <span class="input-group-text">@</span>
-          <input type="email" class="form-control" placeholder="Email"
-          formControlName="email"
-          [ngClass]="{'is-invalid':registerForm.get('email')?.touched && !registerForm.get('email')?.valid}">
+      <!-- validation croisée email -->
+   <div class="d-flex " formGroupName="emailGroup">
+         <!-- email -->
+         <div class="col-md-4" >
+          <label class="form-label">Email</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text">@</span>
+            <input type="email" class="form-control" placeholder="Email"
+            formControlName="email"
+            [ngClass]="{'is-invalid': registerForm.get('emailGroup')?.errors ||
+           ( registerForm.get('emailGroup.email')?.touched &&
+            !registerForm.get('emailGroup.email')?.valid)}">
 
-          <div class="invalid-feedback">
-            <span *ngIf="registerForm.get('email')?.errors?.['required']">Entrez votre E-mail</span>
-            <span *ngIf="registerForm.get('email')?.errors?.['email']">Entrez un E-mail valide </span>
+            <div class="invalid-feedback">
+              <span *ngIf="registerForm.get('emailGroup.email')?.errors?.['required']">Entrez votre E-mail</span>
+              <span *ngIf="registerForm.get('emailGroup.email')?.errors?.['email']">Entrez un E-mail valide </span>
+            </div>
           </div>
         </div>
+    <!--validation email  -->
+    <div class="col-md-4">
+      <label class="form-label">valider l'Email</label>
+      <div class="input-group has-validation">
+        <span class="input-group-text">@</span>
+
+        <input type="email" class="form-control" placeholder="confirmer l'Email(requis)"
+        formControlName="confirmEmail"
+        [ngClass]="{'is-invalid': registerForm.get('emailGroup')?.errors||
+        ((registerForm.get('emailGroup.confirmEmail')?.touched
+        || registerForm.get('emailGroup.confirmEmail')?.dirty)
+        && !registerForm.get('emailGroup.confirmEmail')?.valid)}">
+        <div class="invalid-feedback">
+          <span *ngIf="registerForm.get('emailGroup.confirmEmail')?.errors?.['required']">Entrez votre E-mail</span>
+         <span *ngIf="registerForm.get('emailGroup')?.errors?.['match']">l'E-amil ne correspond pas </span>
+        </div>
       </div>
-  <!--  -->
+    </div><br>
+   </div>
+
+  <!--phone  -->
       <div class="col-md-4">
         <label class="form-label">Phone</label>
         <div class="input-group has-validation">
