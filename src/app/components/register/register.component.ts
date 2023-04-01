@@ -7,6 +7,7 @@ import {
   NgForm,
   Validators,
 } from '@angular/forms';
+import { debounceTime } from 'rxjs';
 import { User } from './user';
 // fonction pour une validation manuelle
 function ratingRangeValidator(min:number , max:number) {
@@ -72,7 +73,7 @@ export class RegisterComponent implements OnInit {
     });
 
     const emailControl = this.registerForm.get('emailGroup.email');
-    emailControl?.valueChanges.subscribe( valeur =>{
+    emailControl?.valueChanges.pipe(debounceTime(2000)).subscribe( valeur =>{
       console.log(valeur);
       this.setMessage(emailControl)
 
