@@ -59,6 +59,11 @@ export class RegisterComponent implements OnInit {
       notification: 'email',
       sendCatalog: false,
     });
+      // recuperer les changements sans la methode (click) ==> niveau HTML
+    this.registerForm.get('notification')?.valueChanges.subscribe(value =>{
+      this.setNotificationSitting(value)
+    });
+
   }
 
   saveData() {
