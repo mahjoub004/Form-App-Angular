@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
+  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -21,7 +22,7 @@ return(c:AbstractControl) : {[key:string] : boolean } | null  =>{
 }
 // fonction pour valider deux champ 'email'
 
-function emailMatcher(c:AbstractControl):{[key:string] : boolean } | null {
+function emailMatcher(c:AbstractControl):{[key:string] : boolean} | null {
   const emailControl = c.get('email')
   const emailConfirmControl = c.get('confirmEmail')
 if (emailControl?.pristine || emailConfirmControl?.pristine) {
@@ -91,6 +92,10 @@ export class RegisterComponent implements OnInit {
       state:[''],
       zip:[''],
   })
+  }
+  //
+  public get addressList(): FormArray{
+    return<FormArray> this.registerForm.get('addresses')
   }
 //
   saveData() {
