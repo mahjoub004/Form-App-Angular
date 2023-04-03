@@ -94,6 +94,10 @@ export class RegisterComponent implements OnInit {
   })
   }
   //
+  public addAddress(): void
+{
+  this.addressList.push(this.createAddressGroup)
+}  //
   public get addressList(): FormArray{
     return<FormArray> this.registerForm.get('addresses')
   }

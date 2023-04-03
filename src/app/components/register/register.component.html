@@ -206,6 +206,8 @@
       <div class="col-12">
         <button type="button" class="btn btn-warning mr-2" (click)="fillFormData()" > <!-- event binding -->
         Remplir les champs par défaut</button>
+        <button type="button" class="btn btn-warning mr-2" (click)="addAddress()" > <!-- event binding -->
+          Ajouter une address </button>
         <button class="btn btn-info" type="submit" [disabled]="!registerForm.valid">Sauvegarder</button>
       </div>
 
